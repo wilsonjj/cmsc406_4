@@ -24,7 +24,7 @@ for line in sentences:
 	#convert to lower case
 	line = line.lower()
 	
-	#remove stopwords
+	#remove stopwords (a little hacky - could be better)
 	for word in stopwords:
 		word = re.sub('[^A-Za-z]','',word)
 		word1 = '\W' + word + '\W'
