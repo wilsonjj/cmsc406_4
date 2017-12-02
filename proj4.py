@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import re
-import Porter_Stemmer_Python
+from Porter_Stemmer_Python import PorterStemmer
+from ctypes import *
+
+porterstemmer = PorterStemmer()
 
 #setup
 sentenceFile = open("sentences.txt","r")
@@ -49,7 +52,17 @@ for line in sentences:
 #print FV
 #print processedSentences
 
-#TDM Generation
+#stem words
 for line in processedSentences:
 
-	
+	line_words = line.split(" ")
+
+	stemmed_words = ''
+
+	for word in line_words:
+		stemmed = porterstemmer.stem(word, 0, len(word) - 1)
+		if len(stemmed_words) == 0:
+			stemmed_words = stemmed
+		else:
+			stemmed_words = stemmed_words + " " + stemmed
+	print(stemmed_words)
