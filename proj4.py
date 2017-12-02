@@ -13,7 +13,8 @@ stopwordsFile = open("stop_words.txt","r")
 stopwords = stopwordsFile.readlines()
 stopwordsFile.close()
 
-FV = {} #empty feature vector
+processedSentences = []
+FV = [] #empty feature vector
 
 #processing
 for line in sentences:
@@ -36,4 +37,19 @@ for line in sentences:
 	line = re.sub('\s+',' ',line)
 	line = re.sub('^\s','',line)
 
-	print line
+	#populate feature vector
+	words = line.split()
+	for word in words:
+		if word not in FV:
+			FV.append(word)
+
+	#add to processed list
+	processedSentences.append(line)
+
+#print FV
+#print processedSentences
+
+#TDM Generation
+for line in processedSentences:
+
+	
