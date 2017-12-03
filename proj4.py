@@ -106,7 +106,7 @@ centroids = []
 for i in range(k):
 	centroid = []
 	for j in range(w):
-		centroid.append(np.random.randint(0,3))
+		centroid.append(np.random.randint(0,5))
 	centroids.append(centroid)
 
 # print centroids
@@ -135,3 +135,21 @@ for i in range(k):
 
 #for i in range(k):
 #	print(cluster[i])
+
+
+node = []
+shortest_dist = []
+for j in range(h):
+	node.append(0)
+	shortest_dist.append(9999)
+
+## assignment
+
+for i in range(k):
+	for j in range(h):
+		if (shortest_dist[j] - cluster[i][j]) > 0:
+			node[j] = i
+			shortest_dist[j] = cluster[i][j]
+
+#print node assigned
+print(node)
