@@ -75,3 +75,6 @@ for line in processedSentences:
 	i+=1
 
 #print TDMatrix <- This looks horrible. Not a good visual representation but it looks like everything works.
+
+#for i in range(h): #<- This is much better. Still ugly because the matrix is huge but lets you compare rows somewhat
+#	print TDMatrix[i]
