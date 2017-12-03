@@ -106,7 +106,7 @@ centroids = []
 for i in range(k):
 	centroid = []
 	for j in range(w):
-		centroid.append(np.random.randint(0,5))
+		centroid.append(np.random.uniform(low=0.0, high=.05, size=None)) #low values as TDM is sparse
 	centroids.append(centroid)
 
 # print centroids
@@ -140,7 +140,7 @@ for i in range(k):
 node = []
 shortest_dist = []
 for j in range(h):
-	node.append(0)
+	node.append(-1)
 	shortest_dist.append(9999)
 
 ## assignment
