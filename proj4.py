@@ -78,3 +78,20 @@ for line in processedSentences:
 
 #for i in range(h): #<- This is much better. Still ugly because the matrix is huge but lets you compare rows somewhat
 #	print TDMatrix[i]
+
+#This writes the TDM as a CSV in the format specified
+tdmFile = open("tdm.csv","w")
+temp = "Keyword Set,"
+for word in FV:
+		temp = temp + word + ','
+tdmFile.write(temp + '\n')
+i = 0
+for line in processedSentences:
+	temp = "Sentence " + str(i+1)
+	j = 0
+	for word in FV:
+		temp = temp + ',' + str(TDMatrix[i][j])
+		j += 1
+	i += 1
+	tdmFile.write(temp + '\n')
+tdmFile.close()
