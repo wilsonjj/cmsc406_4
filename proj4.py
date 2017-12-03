@@ -117,16 +117,21 @@ for i in range(k):
 ## assign sentence to cluster
 
 # Eucladian distance
+
+#each element represents sentence, number is which group it belongs to
+cluster = []
+
 def distance(centroid):
 	distance = []
 	for i in range(h):
 		dist = 0
 		for word in range(w):
 			dist += (TDMatrix[i][word] - centroid[word])*(TDMatrix[i][word] - centroid[word])
-		print(dist * .5)
-
-#each element represents sentence, number is which group it belongs to
-cluster = []
+		distance.append(dist * .5)
+	return distance
 
 for i in range(k):
-	distance(centroids[i])
+	cluster.append(  distance(centroids[i])  )
+
+#for i in range(k):
+#	print(cluster[i])
