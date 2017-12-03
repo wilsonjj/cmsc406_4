@@ -3,7 +3,7 @@
 
 import re
 from Porter_Stemmer_Python import PorterStemmer
-from ctypes import *
+import numpy as np
 
 porterstemmer = PorterStemmer()
 
@@ -95,3 +95,22 @@ for line in processedSentences:
 	i += 1
 	tdmFile.write(temp + '\n')
 tdmFile.close()
+
+## K-means clustering, competitive algorithm(WTA)
+
+#number of clusters
+k = 5
+
+centroids = []
+
+i=0
+for i in range(k):
+	centroid = []
+	for j in range(w):
+		centroid.append(np.random.randint(0,3))
+	centroids.append(centroid)
+
+#print centroids
+
+#for i in range(k):
+#	print(centroids[i])
