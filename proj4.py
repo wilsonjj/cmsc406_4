@@ -103,14 +103,30 @@ k = 5
 
 centroids = []
 
-i=0
 for i in range(k):
 	centroid = []
 	for j in range(w):
 		centroid.append(np.random.randint(0,3))
 	centroids.append(centroid)
 
-#print centroids
+# print centroids
 
 #for i in range(k):
 #	print(centroids[i])
+
+## assign sentence to cluster
+
+# Eucladian distance
+def distance(centroid):
+	distance = []
+	for i in range(h):
+		dist = 0
+		for word in range(w):
+			dist += (TDMatrix[i][word] - centroid[word])*(TDMatrix[i][word] - centroid[word])
+		print(dist * .5)
+
+#each element represents sentence, number is which group it belongs to
+cluster = []
+
+for i in range(k):
+	distance(centroids[i])
