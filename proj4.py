@@ -40,6 +40,14 @@ for line in sentences:
 	line = re.sub('\s+',' ',line)
 	line = re.sub('^\s','',line)
 
+	#stem words
+	words = line.split()
+	temp = ''
+	for word in words:
+		stemmed = porterstemmer.stem(word, 0, len(word)-1)
+		temp = temp + stemmed + " "
+	line = temp
+
 	#populate feature vector
 	words = line.split()
 	for word in words:
@@ -52,17 +60,18 @@ for line in sentences:
 #print FV
 #print processedSentences
 
-#stem words
+#TDM Generation
+w = len(FV)
+h = len(processedSentences)
+
+TDMatrix = [[0 for x in range(w)] for y in range(h)]
+
+i=0
 for line in processedSentences:
+	for word in line.split():
+		if word in FV:
+			j = FV.index(word)
+			TDMatrix[i][j]+=1
+	i+=1
 
-	line_words = line.split(" ")
-
-	stemmed_words = ''
-
-	for word in line_words:
-		stemmed = porterstemmer.stem(word, 0, len(word) - 1)
-		if len(stemmed_words) == 0:
-			stemmed_words = stemmed
-		else:
-			stemmed_words = stemmed_words + " " + stemmed
-	print(stemmed_words)
+#print TDMatrix <- This looks horrible. Not a good visual representation but it looks like everything works.
