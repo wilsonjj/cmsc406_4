@@ -140,7 +140,7 @@ for j in range(h):
 
 def assignUpdate():
 	shortest_dist = []
-	for j in range(30):
+	for j in range(h):
 		shortest_dist.append(9999)
 
 	for i in range(k):
