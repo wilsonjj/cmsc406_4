@@ -23,40 +23,50 @@ FV = [] #empty feature vector
 #processing
 for line in sentences:
 	
-	#remove punctuation, special characters, and numbers
-	line = re.sub('[^A-Za-z ]', ' ', line)
-	
-	#convert to lower case
-	line = line.lower()
-	
-	#remove stopwords (a little hacky - could be better)
-	for word in stopwords:
-		word = re.sub('[^A-Za-z]','',word)
-		word1 = '\W' + word + '\W'
-		line = re.sub(word1,' ',line)
-		word2 = '^' + word + '\W'
-		line = re.sub(word2,' ',line)
-	
-	#remove excess spaces
-	line = re.sub('\s+',' ',line)
-	line = re.sub('^\s','',line)
+	if not line.isspace(): #Only apply is line is not blank
+		
+		#tokenize sentences NOTE: Line will already be tokenized at this point unless there was no space between period and next sentence
+		if re.match('.*\.[A-Z]',line):
+			index = line.find('.')
+			temp = line[index+1:]
+			line = line[:index]
+			sentences.append(temp)
+		#print line
 
-	#stem words
-	words = line.split()
-	temp = ''
-	for word in words:
-		stemmed = porterstemmer.stem(word, 0, len(word)-1)
-		temp = temp + stemmed + " "
-	line = temp
+		#remove punctuation, special characters, and numbers
+		line = re.sub('[^A-Za-z ]', ' ', line)
+		
+		#convert to lower case
+		line = line.lower()
+		
+		#remove stopwords (a little hacky - could be better)
+		for word in stopwords:
+			word = re.sub('[^A-Za-z]','',word)
+			word1 = '\W' + word + '\W'
+			line = re.sub(word1,' ',line)
+			word2 = '^' + word + '\W'
+			line = re.sub(word2,' ',line)
+		
+		#remove excess spaces
+		line = re.sub('\s+',' ',line)
+		line = re.sub('^\s','',line)
 
-	#populate feature vector
-	words = line.split()
-	for word in words:
-		if word not in FV:
-			FV.append(word)
+		#stem words
+		words = line.split()
+		temp = ''
+		for word in words:
+			stemmed = porterstemmer.stem(word, 0, len(word)-1)
+			temp = temp + stemmed + " "
+		line = temp
 
-	#add to processed list
-	processedSentences.append(line)
+		#populate feature vector
+		words = line.split()
+		for word in words:
+			if word not in FV:
+				FV.append(word)
+
+		#add to processed list
+		processedSentences.append(line)
 
 #print FV
 #print processedSentences
