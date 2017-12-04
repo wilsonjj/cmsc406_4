@@ -115,7 +115,7 @@ for i in range(k):
 #for i in range(k):
 #	print(centroids[i])
 
-## assign sentence to cluster
+## assign sentence to node
 
 #each element represents sentence, number is which group it belongs to
 cluster = []
@@ -135,20 +135,19 @@ def distance(centroid):
 
 ## assignment
 node = []
-shortest_dist = []
 for j in range(30):
 	node.append(-1)
-	shortest_dist.append(9999)
 
 def assignUpdate():
+	shortest_dist = []
+	for j in range(30):
+		shortest_dist.append(9999)
+
 	for i in range(k):
 		for j in range(h):
 			if (shortest_dist[j] - cluster[i][j]) > 0:
 				node[j] = i
 				shortest_dist[j] = cluster[i][j]
-
-#print node assigned
-#	print(node)
 
 ## change centroids position
 
@@ -165,7 +164,8 @@ def assignUpdate():
 				total[i] += t[i]
 			c[i] = total[i] / len(t)
 
-for r in range(reps):			
+for r in range(reps):
+	cluster = []			
 	for i in range(k):
 		cluster.append(  distance(centroids[i])  )
 	assignUpdate()
