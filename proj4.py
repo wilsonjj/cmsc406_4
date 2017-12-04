@@ -135,7 +135,7 @@ def distance(centroid):
 
 ## assignment
 node = []
-for j in range(30):
+for j in range(h):
 	node.append(-1)
 
 def assignUpdate():
@@ -157,8 +157,9 @@ def assignUpdate():
 		for n in node:
 			if n == centroids.index(c):
 				temp.append(c)
-		for i in range(len(temp[0])):
-			total.append(0)
+		if len(temp) > 0:
+			for i in range(len(temp[0])):
+				total.append(0)
 		for t in temp:
 			for i in range(len(t)):
 				total[i] += t[i]
