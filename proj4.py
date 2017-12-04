@@ -116,11 +116,10 @@ for i in range(k):
 
 ## assign sentence to cluster
 
-# Eucladian distance
-
 #each element represents sentence, number is which group it belongs to
 cluster = []
 
+# Eucladian distance
 def distance(centroid):
 	distance = []
 	for i in range(h):
@@ -136,14 +135,13 @@ for i in range(k):
 #for i in range(k):
 #	print(cluster[i])
 
+## assignment
 
 node = []
 shortest_dist = []
 for j in range(h):
 	node.append(-1)
 	shortest_dist.append(9999)
-
-## assignment
 
 for i in range(k):
 	for j in range(h):
@@ -152,4 +150,17 @@ for i in range(k):
 			shortest_dist[j] = cluster[i][j]
 
 #print node assigned
-print(node)
+
+## change centroids position
+for c in centroids:
+	temp = []
+	total = []
+	for n in node:
+		if n == centroids.index(c):
+			temp.append(c)
+	for i in range(len(temp[0])):
+		total.append(0)
+	for t in temp:
+		for i in range(len(t)):
+			total[i] += t[i]
+		c[i] = total[i] / len(t)
