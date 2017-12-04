@@ -4,6 +4,7 @@
 import re
 from Porter_Stemmer_Python import PorterStemmer
 import numpy as np
+reps = 10
 
 porterstemmer = PorterStemmer()
 
@@ -129,38 +130,43 @@ def distance(centroid):
 		distance.append(dist * .5)
 	return distance
 
-for i in range(k):
-	cluster.append(  distance(centroids[i])  )
-
 #for i in range(k):
 #	print(cluster[i])
 
 ## assignment
-
 node = []
 shortest_dist = []
-for j in range(h):
+for j in range(30):
 	node.append(-1)
 	shortest_dist.append(9999)
 
-for i in range(k):
-	for j in range(h):
-		if (shortest_dist[j] - cluster[i][j]) > 0:
-			node[j] = i
-			shortest_dist[j] = cluster[i][j]
+def assignUpdate():
+	for i in range(k):
+		for j in range(h):
+			if (shortest_dist[j] - cluster[i][j]) > 0:
+				node[j] = i
+				shortest_dist[j] = cluster[i][j]
 
 #print node assigned
+#	print(node)
 
 ## change centroids position
-for c in centroids:
-	temp = []
-	total = []
-	for n in node:
-		if n == centroids.index(c):
-			temp.append(c)
-	for i in range(len(temp[0])):
-		total.append(0)
-	for t in temp:
-		for i in range(len(t)):
-			total[i] += t[i]
-		c[i] = total[i] / len(t)
+
+	for c in centroids:
+		temp = []
+		total = []
+		for n in node:
+			if n == centroids.index(c):
+				temp.append(c)
+		for i in range(len(temp[0])):
+			total.append(0)
+		for t in temp:
+			for i in range(len(t)):
+				total[i] += t[i]
+			c[i] = total[i] / len(t)
+
+for r in range(reps):			
+	for i in range(k):
+		cluster.append(  distance(centroids[i])  )
+	assignUpdate()
+print(node)
